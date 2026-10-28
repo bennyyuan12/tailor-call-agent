@@ -1,0 +1,126 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Tailor Call Agent</title>
+    <link rel="stylesheet" href="/styles.css" />
+  </head>
+  <body>
+    <main class="app-shell">
+      <section class="topbar">
+        <div>
+          <p class="eyebrow">Market Research Calls</p>
+          <h1>Tailor Call Agent</h1>
+        </div>
+        <div class="status-strip" id="configStatus"></div>
+      </section>
+
+      <section class="metrics" id="metrics"></section>
+
+      <section class="workspace">
+        <aside class="panel import-panel">
+          <div class="panel-heading">
+            <h2>Contacts</h2>
+            <span id="contactCount">0</span>
+          </div>
+          <textarea id="csvInput" spellcheck="false" placeholder="name,phone,city,state,timezone,notes&#10;Hem & Stitch,+12125550123,New York,NY,America/New_York,Pants hem and rush timing"></textarea>
+          <input id="csvFileInput" class="file-input" type="file" accept=".csv,text/csv" />
+          <label class="check-row">
+            <input id="approveImport" type="checkbox" />
+            <span>Approve imported public business numbers for calling</span>
+          </label>
+          <label class="check-row">
+            <input id="resetExistingImport" type="checkbox" />
+            <span>Reset matching contacts for another call</span>
+          </label>
+          <button id="importButton" class="primary">Import CSV</button>
+          <button id="importTestCsvButton">Import Test CSV</button>
+          <div class="divider"></div>
+          <label class="check-row">
+            <input id="callAck" type="checkbox" />
+            <span>Confirm disclosure script and public business-number use</span>
+          </label>
+          <div class="button-row">
+            <button id="callSelectedButton" class="primary">Call Selected</button>
+            <button id="startBatchButton">Start Batch</button>
+            <button id="stopBatchButton">Stop</button>
+          </div>
+          <label class="field-row">
+            <span>Batch limit</span>
+            <input id="batchLimit" type="number" min="1" max="100" value="10" />
+          </label>
+          <p class="notice" id="runtimeNotice"></p>
+        </aside>
+
+        <section class="panel table-panel">
+          <div class="panel-heading">
+            <h2>Call Queue</h2>
+            <button id="refreshButton">Refresh</button>
+          </div>
+          <div class="table-wrap">
+            <table>
+              <thead>
+                <tr>
+                  <th>Shop</th>
+                  <th>Phone</th>
+                  <th>Location</th>
+                  <th>Status</th>
+                  <th>Quotes</th>
+                  <th>Attempts</th>
+                </tr>
+              </thead>
+              <tbody id="contactsTable"></tbody>
+            </table>
+          </div>
+        </section>
+
+        <section class="panel detail-panel">
+          <div class="panel-heading">
+            <h2>Selected Shop</h2>
+            <span id="selectedStatus"></span>
+          </div>
+          <div id="emptyDetail" class="empty-state">Select a tailor from the queue.</div>
+          <div id="detailContent" class="detail-content hidden">
+            <div class="detail-grid">
+              <label>
+                <span>Name</span>
+                <input id="detailName" />
+              </label>
+              <label>
+                <span>Phone</span>
+                <input id="detailPhone" />
+              </label>
+              <label>
+                <span>City</span>
+                <input id="detailCity" />
+              </label>
+              <label>
+                <span>State</span>
+                <input id="detailState" />
+              </label>
+            </div>
+            <label class="full-field">
+              <span>Notes</span>
+              <textarea id="detailNotes"></textarea>
+            </label>
+            <div class="button-row">
+              <button id="saveContactButton">Save</button>
+              <button id="approveButton">Toggle Approved</button>
+              <button id="doNotCallButton">Toggle Do Not Call</button>
+              <button id="resetButton">Reset</button>
+            </div>
+
+            <h3>Extracted Quotes</h3>
+            <div id="quotesList" class="quote-list"></div>
+
+            <h3>Transcript</h3>
+            <div id="transcriptList" class="transcript"></div>
+          </div>
+        </section>
+      </section>
+    </main>
+    <div id="toast" class="toast hidden"></div>
+    <script type="module" src="/app.js"></script>
+  </body>
+</html>
